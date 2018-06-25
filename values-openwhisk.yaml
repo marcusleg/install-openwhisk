@@ -1,0 +1,162 @@
+affinity:
+  coreNodeLabel: core
+  edgeNodeLabel: edge
+  enabled: true
+  invokerNodeLabel: invoker
+  providerNodeLabel: provider
+apigw:
+  apiPort: 9000
+  image: openwhisk/apigateway:latest
+  imagePullPolicy: IfNotPresent
+  mgmtPort: 8080
+  name: apigateway
+  replicaCount: 1
+  restartPolicy: Always
+controller:
+  image: openwhisk/controller:latest
+  imagePullPolicy: IfNotPresent
+  jvmHeapMB: "1024"
+  jvmOptions: ""
+  limits:
+    actionsInvokesConcurrent: 30
+    actionsInvokesConcurrentinsystem: 5000
+    actionsInvokesPerminute: 60
+    actionsSequenceMaxlength: 50
+    triggersFiresPerminute: 60
+  name: controller
+  options: ""
+  port: 8080
+  replicaCount: 1
+  restartPolicy: Always
+db:
+  actionsTable: test_whisks
+  activationsTable: test_activations
+  auth:
+    password: some_passw0rd
+    username: whisk_admin
+  authsTable: test_subjects
+  dbPrefix: test_
+  external: false
+  host: nil
+  image: openwhisk/kube-couchdb:latest
+  imagePullPolicy: IfNotPresent
+  name: couchdb
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    pvcName: couchdb-pvc
+    size: 8Gi
+    storageClass: default
+  port: 5984
+  protocol: http
+  provider: CouchDB
+  replicaCount: 1
+  restartPolicy: Always
+docker:
+  image:
+    prefix: openwhisk
+    tag: latest
+  registry:
+    name: ""
+    password: ""
+    username: ""
+invoker:
+  busyThreshold: 8
+  containerFactory:
+    impl: kubernetes
+    kubernetes:
+      agent:
+        enabled: true
+        image: openwhisk/kube-invoker-agent:latest
+        name: invoker-agent
+        port: 3233
+      replicaCount: 1
+    useRunc: false
+  containerNetwork: bridge
+  containerPool:
+    coreshare: 4
+    numcore: 2
+  image: openwhisk/invoker:latest
+  imagePullPolicy: IfNotPresent
+  jvmHeapMB: "512"
+  jvmOptions: ""
+  name: invoker
+  options: ""
+  port: 8080
+  pullRuntimesImage: openwhisk/kube-docker-pull:latest
+  restartPolicy: Always
+kafka:
+  image: wurstmeister/kafka:0.11.0.1
+  imagePullPolicy: IfNotPresent
+  name: kafka
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    pvcName: kafka-pvc
+    size: 2Gi
+    storageClass: default
+  port: 9092
+  replicaCount: 1
+  restartPolicy: Always
+kafkaprovider:
+  apiPort: 8080
+  dbPrefix: kp
+  image: openwhisk/kafkaprovider:latest
+  imagePullPolicy: IfNotPresent
+  name: kafkaprovider
+  replicaCount: 1
+  restartPolicy: Always
+nginx:
+  httpPort: 80
+  httpsAdminPort: 8443
+  httpsPort: 443
+  image: nginx:1.11
+  imagePullPolicy: IfNotPresent
+  name: nginx
+  replicaCount: 1
+  restartPolicy: Always
+redis:
+  image: redis:3.2
+  imagePullPolicy: IfNotPresent
+  name: redis
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    pvcName: redis-pvc
+    size: 256Mi
+    storageClass: default
+  port: 6379
+  replicaCount: 1
+  restartPolicy: Always
+whisk:
+  auth:
+    guest: 23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP
+    system: 789c46b1-71f6-4ed5-8c54-816aa4f8c502:abczO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP
+  ingress:
+    api_host_name: openwhisk.kubernetes.riotfork.com
+    api_host_port: 80
+    api_host_proto: http
+    name: ow-ingress
+    type: NodePort
+  runtimes: runtimes.json
+  systemNameSpace: /whisk.system
+  versions:
+    cli: latest
+    name: OpenWhisk
+    tag: latest
+zookeeper:
+  image: zookeeper:3.4
+  imagePullPolicy: IfNotPresent
+  leaderElectionPort: 3888
+  name: zookeeper
+  persistence:
+    accessMode: ReadWriteOnce
+    enabled: true
+    pvcName: zookeeper-pvc
+    size: 2Gi
+    storageClass: default
+  port: 2181
+  replicaCount: 1
+  restartPolicy: Always
+  serverPort: 2888
+
