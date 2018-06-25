@@ -1,0 +1,3 @@
+[submodule "incubator-openwhisk-deploy-kube"]
+	path = incubator-openwhisk-deploy-kube
+	url = https://github.com/apache/incubator-openwhisk-deploy-kube
