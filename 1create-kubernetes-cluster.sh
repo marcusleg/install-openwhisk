@@ -27,10 +27,3 @@ while [ $(kops get cluster | grep "Validation Failed") ]; do
     echo -n "."
 done
 echo " done!"
-
-# install addons
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/metrics-server/v1.8.x.yaml
-
-# install helm
-helm init
-kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
