@@ -14,7 +14,7 @@ aws s3 mb $KOPS_STATE_STORE || true
 kops create cluster \
 --master-zones=eu-central-1a \
 --zones=eu-central-1a,eu-central-1b,eu-central-1c \
---master-size=t2.micro  --node-size=t2.small --node-count=1 \
+--master-size=t2.medium  --node-size=t2.medium --node-count=1 \
 --master-volume-size=16 --node-volume-size=32 \
 --dns-zone=riotfork.com
 
