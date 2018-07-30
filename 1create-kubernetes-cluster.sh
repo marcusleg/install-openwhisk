@@ -10,6 +10,23 @@ which helm
 # create s3 bucket if it doesn't already exist
 aws s3 mb $KOPS_STATE_STORE || true
 
+# create IAM group and user for kops if necessary
+if ! aws iam get-group --group-name kopssd &>/dev/null; then
+    aws iam create-group --group-name kops
+
+    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
+    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops
+    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name kops
+    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops
+    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops
+
+    aws iam create-user --user-name kops
+
+    aws iam add-user-to-group --user-name kops --group-name kops
+
+    aws iam create-access-key --user-name kops
+fi
+
 # create cluster config
 kops create cluster \
 --master-zones=eu-central-1a \
