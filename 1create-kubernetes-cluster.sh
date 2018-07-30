@@ -22,7 +22,7 @@ kops create cluster \
 kops update cluster --yes
 
 echo -n "Waiting for Cluster to come up"
-while [ $(kops get cluster | grep "Validation Failed") ]; do
+while ! kops validate cluster &>/dev/null; do
     sleep 10
     echo -n "."
 done
