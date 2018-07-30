@@ -4,6 +4,12 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/kops/master/addons
 
 # install helm
 helm init
+echo -n "Waiting for tiller pod to start"
+while ! kubectl get pod -n kube-system | grep tiller | grep "Running" &>/dev/null; do
+    echo -n "."
+    sleep 5
+done
+echo "done!"
 kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
 
 # install Traefik as ingress controller
