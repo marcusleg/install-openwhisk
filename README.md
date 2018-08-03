@@ -1,11 +1,16 @@
 # kops-openwhisk
-This repository holds the installations scripts for the Kubernetes Cluster with OpenWhisk I used while writing my bachelor's thesis.  
+This repository holds the installations scripts for the OpenWhisk test environemnts I used while writing my bachelor's thesis.  
+The two environments are:
+
+* A Kubernetes cluster running on AWS. (Installed and maintained using [kops](https://github.com/kubernetes/kops).)
+* A Minikube Kubernetes cluster
+
 Maintenance is likely to end after August 27th, 2018.
 
 
 ## How to use
-Run the numbered Bash scripts in ascending order.  
-*Warning:* there is a lot of hardcoded configuration specific to my AWS account in the Bash scripts as well as the *values-*.yaml* files!
+Navigate to either the kops/ or minikube/ subfolder and run the numbered Bash scripts in ascending order.  
+**Warning:** the kops installation has a lot of hardcoded configuration specific to my AWS account!
 
 
 ## Note on publishing
