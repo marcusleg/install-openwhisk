@@ -3,7 +3,7 @@ This repository holds the installations scripts for the Kubernetes Cluster with 
 Maintenance is likely to end after August 27th, 2018.
 
 
-$# How to use
+## How to use
 Run the numbered Bash scripts in ascending order.  
 *Warning:* there is a lot of hardcoded configuration specific to my AWS account in the Bash scripts as well as the *values-*.yaml* files!
 
