@@ -8,10 +8,12 @@ which kubectl
 which helm
 
 # create s3 bucket if it doesn't already exist
-aws s3 mb $KOPS_STATE_STORE || true
+if ! aws s3 ls $KOPS_STATE_STORE &>/dev/null; then
+    aws s3 mb s3://$KOPS_STATE_STORE
+fi
 
 # create IAM group and user for kops if necessary
-if ! aws iam get-group --group-name kopssd &>/dev/null; then
+if ! aws iam get-group --group-name kops &>/dev/null; then
     aws iam create-group --group-name kops
 
     aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
