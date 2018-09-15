@@ -31,16 +31,15 @@ dashboardProviders:
         path: /var/lib/grafana/dashboards
 
 dashboards:
-  default:
-    kubernetes-all-nodes:
-      gnetId: 3131
-      revision: 1
-      datasource: Prometheus
-    kubernetes-cluster-monitoring:
-      gnetId: 3119
-      revision: 2
-      datasource: Prometheus
-    kubernetes-node-exporter-full:
-      gnetId: 3320
-      revision: 1
-      datasource: Prometheus
+  kubernetes-all-nodes:
+    gnetId: 3131
+    revision: 1
+    datasource: Prometheus
+  kubernetes-cluster-monitoring:
+    gnetId: 3119
+    revision: 2
+    datasource: Prometheus
+  kubernetes-node-exporter-full:
+    gnetId: 3320
+    revision: 1
+    datasource: Prometheus
