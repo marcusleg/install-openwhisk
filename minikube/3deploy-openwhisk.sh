@@ -1,4 +1,4 @@
 #!/bin/bash
-kubectl label nodes minikube openwhisk-role=invoker
+kubectl label nodes --all openwhisk-role=invoker
 kubectl create namespace openwhisk
-helm install ../incubator-openwhisk-deploy-kube/helm/openwhisk/ --namespace openwhisk --name openwhisk -f values-openwhisk.yaml
+helm install ../incubator-openwhisk-deploy-kube/helm/openwhisk/ --namespace openwhisk --name openwhisk -f values-openwhisk.yaml --set ingress.api_host_name=$(minikube ip)

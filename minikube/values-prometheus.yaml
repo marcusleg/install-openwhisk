@@ -515,7 +515,7 @@ server:
   ingress:
     ## If true, Prometheus server Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## Prometheus server Ingress annotations
     ##
@@ -530,8 +530,8 @@ server:
     ## Prometheus server Ingress hostnames with optional path
     ## Must be provided if Ingress is enabled
     ##
-    hosts: []
-    #   - prometheus.domain.com
+    hosts:
+       - prometheus.192.168.99.100.xip.io
     #   - domain.com/prometheus
 
     ## Prometheus server Ingress TLS configuration

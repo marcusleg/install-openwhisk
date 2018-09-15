@@ -2,7 +2,7 @@
 # install helm
 helm init
 echo -n "Waiting for tiller pod to start"
-while ! kubectl get pod -n kube-system | grep tiller | grep "Running" &>/dev/null; do
+while ! kubectl get pod -n kube-system | grep tiller-deploy | grep "1/1" &>/dev/null; do
     echo -n "."
     sleep 5
 done
@@ -11,6 +11,6 @@ kubectl create clusterrolebinding tiller-cluster-admin --clusterrole=cluster-adm
 
 # install monitoring components
 kubectl create namespace monitoring
-helm install stable/prometheus --namespace monitoring --name prometheus -f values-prometheus.yaml
-helm install stable/grafana --namespace monitoring --name grafana
+helm install stable/prometheus --namespace monitoring --name prometheus -f values-prometheus.yaml --set server.ingress.hosts={prometheus.$(minikube ip).xip.io}
+helm install stable/grafana --namespace monitoring --name grafana -f values-grafana.yaml --set ingress.hosts={grafana.$(minikube ip).xip.io}
 
