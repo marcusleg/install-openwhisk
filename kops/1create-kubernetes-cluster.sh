@@ -42,7 +42,7 @@ kops update cluster --yes
 
 echo -n "Waiting for Cluster to come up"
 while ! kops validate cluster &>/dev/null; do
-    sleep 10
+    sleep 15
     echo -n "."
 done
 echo " done!"
